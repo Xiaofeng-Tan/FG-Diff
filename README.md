@@ -1,5 +1,7 @@
 # Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection
 
+[**Paper**](https://arxiv.org/abs/2412.05095) | [**Project Page**](https://sopo-motion.github.io/)
+
 This repository is the official implementation of  "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
 
 <!-- Visit our [**webpage**](https://www.pinlab.org/coskad) for more details. -->
