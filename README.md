@@ -114,3 +114,20 @@ unzip checkpoints.zip
 
 python eval_FGDMAD.py --config /config/[HR-Avenue/HR-STC/UBnormal]/[test.yaml/test_hr.yaml]
 ```
+## Acknowledgement
+
+This work is built on many amazing research works and open-source projects, thanks a lot to all the authors for sharing!
+
+- https://github.com/aleflabo/MoCoDAD
+
+## Citation
+If you find this repository/work helpful in your research, please consider citing the paper and starring the repo ⭐.
+
+```
+@article{tan2024frequency,
+  title={Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
+  author={Tan, Xiaofeng and Wang, Hongsong and Geng, Xin},
+  journal={arXiv preprint arXiv:2412.03044},
+  year={2024}
+}
+```
