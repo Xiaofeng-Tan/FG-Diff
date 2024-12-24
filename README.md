@@ -1,6 +1,6 @@
 # Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection
 
-[**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**](https://sopo-motion.github.io/)
+[**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**](https://fgad-sk.github.io/)
 
 This repository is the official implementation of  "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
 
