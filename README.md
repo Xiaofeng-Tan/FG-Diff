@@ -1,6 +1,6 @@
 # Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection
 
-[**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**]([https://fgad-sk.github.io/](https://xiaofeng-tan.github.io/projects/FG-Diff/index.html))
+[**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**]([https://xiaofeng-tan.github.io/projects/FG-Diff/index.html])
 
 This repository is the official implementation of  "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
 
