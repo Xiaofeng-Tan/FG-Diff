@@ -7,9 +7,9 @@ This repository is the official implementation of  "**Frequency-Guided Diffusion
 <!-- Visit our [**webpage**](https://www.pinlab.org/coskad) for more details. -->
 Video anomaly detection is an essential yet challenging open-set task in computer vision, often addressed by leveraging reconstruction as a proxy task. However, existing reconstruction-based methods encounter challenges in two main aspects: (1) limited model robustness for open-set scenarios, (2) and an overemphasis on, but restricted capacity for, detailed motion reconstruction. To this end, we propose a novel frequency-guided diffusion model with perturbation training, which enhances the model robustness by perturbation training and emphasizes the principal motion components guided by motion frequencies. Specifically, we first use a trainable generator to produce perturbative samples for perturbation training of the diffusion model. During the perturbation training phase, the model robustness is enhanced and the domain of the reconstructed model is broadened by training against this generator. Subsequently, perturbative samples are introduced for inference, which impacts the reconstruction of normal and abnormal motions differentially, thereby enhancing their separability. Considering that motion details originate from high-frequency information, we propose a masking method based on 2D discrete cosine transform to separate high-frequency information and low-frequency information. Guided by the high-frequency information from observed motion, the diffusion model can focus on generating low-frequency information, and thus reconstructing the motion accurately. Experimental results on five video anomaly detection datasets, including human-related and open-set benchmarks, demonstrate the effectiveness of the proposed method. 
 
-![teaser](assets/intro.png)
-
-![teaser](assets/framework.png) 
+<img src="assets/intro.png" alt="teaser" style="width: 50%; display: block; margin: auto;"/>
+<img src="assets/intro_method.png" alt="teaser" style="width: 50%; display: block; margin: auto;"/>
+<img src="assets/framework.png" alt="teaser" style="width: 100%; display: block; margin: auto;"/>
 
 ## Content
 ```
