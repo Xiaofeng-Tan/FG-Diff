@@ -109,7 +109,7 @@ python eval_FGDMAD.py --config /config/[HR-Avenue/HR-STC/UBnormal]/[test.yaml/te
 
 ### **Pretrained Models**
 
-The checkpoints for the pretrained models on all datasets can be found in /checkpoints/[HR-Avenue/HR-STC/UBnormal]/train_experiment/checkpoint.ckpt. Note that we have compressed the checkpoints files due to the storage limitation.
+The checkpoints for the pre-trained models on all datasets can be found in /checkpoints/[HR-Avenue/HR-STC/UBnormal]/train_experiment/checkpoint.ckpt. Note that our checkpoint will be released after the paper's official publication.
 
 ```sh
 unzip checkpoints.zip
