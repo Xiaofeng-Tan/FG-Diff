@@ -1,4 +1,7 @@
 # Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection
+**Xiaofeng Tan**, **Hongsong Wang**, **Xin Geng**, **Liang Wang**
+
+PALM lab@SEU
 
 [**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**](https://xiaofeng-tan.github.io/projects/FG-Diff/index.html)
 
