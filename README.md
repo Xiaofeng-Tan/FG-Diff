@@ -1,18 +1,30 @@
-# Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection
-**[Xiaofeng Tan](https://xiaofeng-tan.github.io/)**, **Hongsong Wang**, **Xin Geng**, **Liang Wang**
+<h1 align="center"><strong>FGDMAD: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection</strong></h1>
 
+<p align="center">
+   <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
+   Hongsong Wang<sup>1,2</sup>&emsp;
+   Xin Geng<sup>1,2</sup>&emsp;
+   Liang Wang<sup>3</sup>&emsp;
+   <br>
+   <sup>1</sup>Southeast University&emsp;
+   <sup>2</sup>PALM Lab @ SEU
+   <sup>3</sup>National Lab of Pattern Recognition
+</p>
 
+<p align="center">
+  <a href="https://arxiv.org/abs/2412.03044">
+    <img src="https://img.shields.io/badge/Paper-PDF-yellow?style=flat&logo=arXiv&logoColor=yellow" alt="Paper PDF on arXiv">
+  </a>
+  <a href="https://xiaofeng-tan.github.io/projects/FG-Diff/index.html">
+    <img src="https://img.shields.io/badge/Project-Page-green?style=flat&logo=Google%20chrome&logoColor=green" alt="Project Page">
+  </a>
+</p>
 
-[**Paper**](https://arxiv.org/abs/2412.03044) | [**Project Page**](https://xiaofeng-tan.github.io/projects/FG-Diff/index.html) | *[PALM lab@SEU](https://palm.seu.edu.cn/)*
+This repository is the official implementation of "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
 
-This repository is the official implementation of  "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
-
-<!-- Visit our [**webpage**](https://www.pinlab.org/coskad) for more details. -->
 Video anomaly detection is an essential yet challenging open-set task in computer vision, often addressed by leveraging reconstruction as a proxy task. However, existing reconstruction-based methods encounter challenges in two main aspects: (1) limited model robustness for open-set scenarios, (2) and an overemphasis on, but restricted capacity for, detailed motion reconstruction. To this end, we propose a novel frequency-guided diffusion model with perturbation training, which enhances the model robustness by perturbation training and emphasizes the principal motion components guided by motion frequencies. Specifically, we first use a trainable generator to produce perturbative samples for perturbation training of the diffusion model. During the perturbation training phase, the model robustness is enhanced and the domain of the reconstructed model is broadened by training against this generator. Subsequently, perturbative samples are introduced for inference, which impacts the reconstruction of normal and abnormal motions differentially, thereby enhancing their separability. Considering that motion details originate from high-frequency information, we propose a masking method based on 2D discrete cosine transform to separate high-frequency information and low-frequency information. Guided by the high-frequency information from observed motion, the diffusion model can focus on generating low-frequency information, and thus reconstructing the motion accurately. Experimental results on five video anomaly detection datasets, including human-related and open-set benchmarks, demonstrate the effectiveness of the proposed method. 
 
 <img src="assets/intro.png" alt="teaser" style="width: 50%; display: block; margin: auto;"/>
-<img src="assets/intro_method.png" alt="teaser" style="width: 50%; display: block; margin: auto;"/>
-<img src="assets/framework.png" alt="teaser" style="width: 100%; display: block; margin: auto;"/>
 
 ## Content
 ```
@@ -71,16 +83,15 @@ You can download the extracted poses for the datasets HR-Avenue, HR-ShanghaiTech
 
 Place the extracted folder in a `./data` folder and change the configs accordingly.
 
-
 ### **Training** 
 
-To train FGDMAD, you can select the different parameters for training the model and inference by different pattern. Here, we list some improtant parameters for training strategy and frequency-guided diffusion process:
+To train FGDMAD, you can configure different parameters for model training and inference. Here, we list some important parameters for the training strategy and frequency-guided diffusion process:
 1. Training strategy:
-   - perturbe [true / false]: Weather the model is trained by perturbation training using input perturbation;
+   - perturbe [true / false]: Whether to use perturbation training with input perturbation;
    - weight_perturbe [float number]: The magnitude of input perturbation;
-   - dct [true / false]: Weather use the DCT to obtain conditioned code. If false, the conditioned code will be encoder by a trainable encoder;
+   - dct [true / false]: Whether to use DCT to obtain conditioned code. If false, the conditioned code will be encoded by a trainable encoder;
 2. Frequency-guided diffusion process:
-    -  masked_rate_dct: The mask rate using the DCT masked.
+    - masked_rate_dct: The mask rate using DCT masking.
 
 You can update the parameters "data_dir", "test_path" and "dataset_path_to_robust" according to the path where the dataset is stored. Additionally, change the "dir_name" and TensorBoard parameters for better experiment tracking.
 
@@ -89,30 +100,29 @@ To train FGDMAD:
 python train_FGDMAD.py --config config/[Avenue/UBnormal/STC]/{config_name}.yaml
 ```
 
-
 ### **Evaluation by the Trained Model**
 The training configuration is saved in the relevant experiment directory (`/args.exp_dir/args.dataset_choice/args.dir_name`). 
-To evaluate the model on the test set, you need to change the following parameters in the configuration file. 
+To evaluate the model on the test set, you need to modify the following parameters in the configuration file:
 
 - split: 'Test'
 - validation: 'False'
 - load_ckpt: 'name_of_ckpt'
 
-Test FGDMAD
+Test FGDMAD:
 ```sh
 python eval_FGDMAD.py --config /args.exp_dir/args.dataset_choice/args.dir_name/config.yaml
 ```
-Moreover, you can use the flag for human-related (HR) datasets:
-- use_hr: False -> just for test. Use the entire version of the dataset or the Human-Related one.
+Additionally, you can use the flag for human-related (HR) datasets:
+- use_hr: False -> Use the entire version of the dataset or the Human-Related one.
 
-Of course, you also can use the provided configuration file.
+Alternatively, you can use the provided configuration file:
 ```sh
 python eval_FGDMAD.py --config /config/[HR-Avenue/HR-STC/UBnormal]/[test.yaml/test_hr.yaml]
 ```
 
 ### **Pretrained Models**
 
-The checkpoints for the pre-trained models on all datasets can be found in /checkpoints/[HR-Avenue/HR-STC/UBnormal]/train_experiment/checkpoint.ckpt. Note that our checkpoint will be released after the paper's official publication.
+The checkpoints for the pre-trained models on all datasets can be found in /checkpoints/[HR-Avenue/HR-STC/UBnormal]/train_experiment/checkpoint.ckpt. Note that our checkpoints will be released after the paper's official publication.
 
 ```sh
 unzip checkpoints.zip
@@ -135,4 +145,3 @@ If you find this repository/work helpful in your research, please consider citin
   journal={arXiv preprint arXiv:2412.03044},
   year={2024}
 }
-```
