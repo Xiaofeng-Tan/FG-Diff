@@ -1,4 +1,4 @@
-<h1 align="center"><strong>FGDMAD: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection</strong></h1>
+<h1 align="center"><strong>FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection</strong></h1>
 
 <p align="center">
    <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
