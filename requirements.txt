@@ -1,0 +1,36 @@
+# FG-Diff Requirements
+# Python 3.10
+# 
+# Install: pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# PyTorch (CUDA 12.1)
+torch==2.1.2
+torchvision==0.16.2
+
+# PyTorch Lightning
+pytorch-lightning==2.2.4
+torchmetrics>=1.4.0
+lightning-utilities>=0.11.0
+
+# DCT transform
+torch-dct==0.1.6
+
+# Scientific computing
+numpy==1.23.2
+scipy==1.13.0
+scikit-learn==1.4.2
+
+# Data processing
+pandas==1.4.3
+openpyxl==3.1.2
+
+# Configuration
+pyyaml==6.0.1
+
+# Visualization & logging
+matplotlib==3.8.2
+tensorboard==2.12.3
+tqdm==4.66.4
+
+# Optional: Weights & Biases
+wandb==0.17.0

@@ -25,7 +25,7 @@ from torch_dct import dct, idct
 torch.set_float32_matmul_precision('medium')
 opts = {'Adam': Adam, 'SGD': SGD, 'AdamW':AdamW,'NAdam':NAdam,'Adamax':Adamax,'RAdam':RAdam,'RMSprop':RMSprop,'Adagrad':Adagrad,'Adadelta':Adadelta}
 
-class FGDMAD(pl.LightningModule):
+class FG_DIFF(pl.LightningModule):
     
     losses = {'l1':nn.L1Loss, 'smooth_l1':nn.SmoothL1Loss, 'mse':nn.MSELoss}
     conditioning_strategies = {'cat':'concat', 'concat':'concat', 
@@ -42,7 +42,7 @@ class FGDMAD(pl.LightningModule):
             args (argparse.Namespace): arguments containing the hyperparameters of the model
         """
         
-        super(FGDMAD, self).__init__()
+        super(FG_DIFF, self).__init__()
 
         # Log the hyperparameters of the model
         self.save_hyperparameters(args)
@@ -138,7 +138,7 @@ class FGDMAD(pl.LightningModule):
         #self.condition_encoder, self.model = condition_encoder, model
         self.model = model
         if self.perturb:
-            self.perturb_generator = STSAE(c_in=self.num_coords, h_dim=self.cond_h_dim, 
+            self.perturbe_generator = STSAE(c_in=self.num_coords, h_dim=self.cond_h_dim, 
                                             latent_dim=self.cond_latent_dim, n_frames=self.input_n_frames + self.n_frames_condition, 
                                             dropout=self.cond_dropout, n_joints=self.n_joints, 
                                             layer_channels=self.cond_channels, device=self.device)
@@ -212,10 +212,10 @@ class FGDMAD(pl.LightningModule):
                 noise = torch.randn_like(x, device=self.device) if j > 1 else torch.zeros_like(x, device=self.device)
                 x_t, _ = noise_scheduler.noise_graph(input_data, t_)
                 if self.perturb:
-                    _, grad = self.perturb_generator(x,t)
+                    _, grad = self.perturbe_generator(x,t)
                     x_perturbed = self.adversarial_example(x, self.weight_perturb, grad)
                     predicted_noise,_ = model(x_perturbed, t=t, condition_data = condition_embedding)
-                    _, grad = self.perturb_generator(x_t,t_)
+                    _, grad = self.perturbe_generator(x_t,t_)
                     x_t = self.adversarial_example(x_t, self.weight_perturb, grad)
                 else:
                     predicted_noise,_ = model(x, t=t, condition_data = condition_embedding)
@@ -406,7 +406,7 @@ class FGDMAD(pl.LightningModule):
         x_t, noise = self.noise_scheduler.noise_graph(corrupt_data, t)
 
         if self.perturb:
-            _, grad = self.perturb_generator(x_t,t)
+            _, grad = self.perturbe_generator(x_t,t)
             x_perturbed_t = self.adversarial_example(x_t, self.weight_perturb, grad)
             predicted_noise,_ = self.model(x_perturbed_t, t = t, condition_data = condition_embedding)
         else:
@@ -531,7 +531,7 @@ class FGDMAD(pl.LightningModule):
         #scheduler_1 = CosineAnnealingWarmRestarts(optimizer_1, T_0=5, T_mult=2, eta_min=0)
 
         if self.perturb:
-            optimizer_2 = self.opt(list(self.perturb_generator.parameters()), lr=self.learning_rate)
+            optimizer_2 = self.opt(list(self.perturbe_generator.parameters()), lr=self.learning_rate)
             #optimizer_2 = Adam(list(self.perturb_generator.parameters()), lr=self.learning_rate)
             #scheduler_2 = CosineAnnealingWarmRestarts(optimizer_2, T_0=5, T_mult=2, eta_min=0)
             scheduler_2 = torch.optim.lr_scheduler.ExponentialLR(optimizer_2, gamma=0.99, last_epoch=-1, verbose=False)

@@ -1,147 +1,241 @@
 <h1 align="center"><strong>FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection</strong></h1>
 
 <p align="center">
-   <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
-   Hongsong Wang<sup>1,2</sup>&emsp;
-   Xin Geng<sup>1,2</sup>&emsp;
-   Liang Wang<sup>3</sup>&emsp;
-   <br>
-   <sup>1</sup>Southeast University&emsp;
-   <sup>2</sup>PALM Lab @ SEU
-   <sup>3</sup>National Lab of Pattern Recognition
+  <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
+  Hongsong Wang<sup>1,2</sup>&emsp;
+  Xin Geng<sup>1,2</sup>&emsp;
+  Liang Wang<sup>3</sup>&emsp;
+  <br>
+  <sup>1</sup>Southeast University&emsp;
+  <sup>2</sup>PALM Lab @ SEU&emsp;
+  <sup>3</sup>National Lab of Pattern Recognition
 </p>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2412.03044">
-    <img src="https://img.shields.io/badge/Paper-PDF-yellow?style=flat&logo=arXiv&logoColor=yellow" alt="Paper PDF on arXiv">
+    <img src="https://img.shields.io/badge/arXiv-2412.03044-b31b1b?style=flat&logo=arXiv&logoColor=white" alt="arXiv">
   </a>
   <a href="https://xiaofeng-tan.github.io/projects/FG-Diff/index.html">
-    <img src="https://img.shields.io/badge/Project-Page-green?style=flat&logo=Google%20chrome&logoColor=green" alt="Project Page">
+    <img src="https://img.shields.io/badge/Project-Page-blue?style=flat&logo=Google%20chrome&logoColor=white" alt="Project Page">
+  </a>
+  <a href="https://huggingface.co/datasets/ModelsWeights/AD-FG-Diff">
+    <img src="https://img.shields.io/badge/🤗%20HuggingFace-Dataset-yellow" alt="HuggingFace Dataset">
+  </a>
+  <a href="https://huggingface.co/ModelsWeights/AD-FG-Diff">
+    <img src="https://img.shields.io/badge/🤗%20HuggingFace-Model-orange" alt="HuggingFace Model">
   </a>
 </p>
 
-This repository is the official implementation of "**Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection**"
+<p align="center">
+  <img src="https://img.shields.io/github/stars/Xiaofeng-Tan/FG-Diff?style=social" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/forks/Xiaofeng-Tan/FG-Diff?style=social" alt="GitHub Forks">
+  <img src="https://img.shields.io/github/license/Xiaofeng-Tan/FG-Diff" alt="License">
+</p>
 
-Video anomaly detection is an essential yet challenging open-set task in computer vision, often addressed by leveraging reconstruction as a proxy task. However, existing reconstruction-based methods encounter challenges in two main aspects: (1) limited model robustness for open-set scenarios, (2) and an overemphasis on, but restricted capacity for, detailed motion reconstruction. To this end, we propose a novel frequency-guided diffusion model with perturbation training, which enhances the model robustness by perturbation training and emphasizes the principal motion components guided by motion frequencies. Specifically, we first use a trainable generator to produce perturbative samples for perturbation training of the diffusion model. During the perturbation training phase, the model robustness is enhanced and the domain of the reconstructed model is broadened by training against this generator. Subsequently, perturbative samples are introduced for inference, which impacts the reconstruction of normal and abnormal motions differentially, thereby enhancing their separability. Considering that motion details originate from high-frequency information, we propose a masking method based on 2D discrete cosine transform to separate high-frequency information and low-frequency information. Guided by the high-frequency information from observed motion, the diffusion model can focus on generating low-frequency information, and thus reconstructing the motion accurately. Experimental results on five video anomaly detection datasets, including human-related and open-set benchmarks, demonstrate the effectiveness of the proposed method. 
+---
 
-<img src="assets/intro.png" alt="teaser" style="width: 50%; display: block; margin: auto;"/>
+**TL;DR:** We propose **FG-Diff**, a frequency-guided diffusion model with perturbation training that enhances model robustness through adversarial perturbation training and emphasizes principal motion components guided by motion frequencies.
 
-## Content
-```
-.
-├── assets
-│   ├── framework.jpg
-│   ├── intro.jpg
-├── config
-│   ├── Avenue
-│   │   ├── test.yaml
-│   │   ├── test_hr.yaml
-│   │   └── train.yaml
-│   ├── STC
-│   │   ├── test.yaml
-│   │   └── train.yaml
-│   └── UBnormal
-│       ├── test.yaml
-│       └── train.yaml
-├── environment.yml
-├── eval_FGDMAD.py
-├── models
-│   ├── common
-│   │   └── components.py
-│   ├── gcae
-│   │   └── stsgcn.py
-│   ├── FGDMAD.py
-│   └── stsae
-│       ├── stsae.py
-│       └── stsae_unet.py
-├── README.md
-├── train_FGDMAD.py
-└── utils
-    ├── argparser.py
-    ├── data.py
-    ├── dataset.py
-    ├── dataset_utils.py
-    ├── diffusion_utils.py
-    ├── ema.py
-    ├── eval_utils.py
-    ├── get_robust_data.py
-    ├── __init__.py
-    ├── model_utils.py
-    ├── preprocessing.py
-    └── tools.py
-```
+<p align="center">
+  <img src="assets/intro.png" alt="FG-Diff Overview" width="60%"/>
+</p>
 
-## Setup
+## 📣 News
+
+- [2025/12] 📖 Release technical documentation. See [Documentation (English)](docs/TECHNICAL_EN.md) | [文档 (中文)](docs/TECHNICAL_CN.md).
+- [2025/12] 🎉 Release pre-trained checkpoints on [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff).
+- [2025/12] 📦 Release datasets on [HuggingFace](https://huggingface.co/datasets/ModelsWeights/AD-FG-Diff).
+- [2024/12] 🚀 Release training and evaluation code.
+- [2024/12] 📄 Paper is available on [arXiv](https://arxiv.org/abs/2412.03044).
+
+## 📆 Plan
+
+- [x] Release environment setup
+- [x] Release training code
+- [x] Release evaluation code
+- [x] Release pre-trained checkpoints
+- [x] Release datasets on HuggingFace
+- [x] Release technical documentation
+
+## 🗂️ Pre-trained Models
+
+| Model | Description | Download |
+|-------|-------------|----------|
+| FG-Diff-Avenue | Pre-trained model on HR-Avenue | [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff) |
+| FG-Diff-STC | Pre-trained model on HR-ShanghaiTech | [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff) |
+| FG-Diff-UBnormal | Pre-trained model on UBnormal | [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff) |
+
+## 🛠️ Setup
+
 ### Environment
-```sh
-conda env create -f environment.yml
-conda activate FGDMAD
+
+```bash
+# Create conda environment
+conda create -n FG-Diff python=3.10
+conda activate FG-Diff
+
+# Install PyTorch (CUDA 12.1)
+pip install torch==2.1.2 torchvision==0.16.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# Install dependencies
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+<details>
+<summary>🇨🇳 Configure China Mirror Sources (Optional)</summary>
+
+```bash
+# Configure pip (Tsinghua mirror)
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+# Configure conda (Tsinghua mirror)
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --set show_channel_urls yes
+```
+
+</details>
 
 ### Datasets
-You can download the extracted poses for the datasets HR-Avenue, HR-ShanghaiTech and HR-UBnormal from the [GDRive](https://drive.google.com/drive/folders/1aUDiyi2FCc6nKTNuhMvpGG_zLZzMMc83?usp=drive_link), and this link is provided by a previous work from other researchers.
 
-Place the extracted folder in a `./data` folder and change the configs accordingly.
+Download the extracted skeleton poses from [HuggingFace](https://huggingface.co/datasets/ModelsWeights/AD-FG-Diff):
 
-### **Training** 
+**Option 1: Using Script**
+```bash
+# Install huggingface_hub
+pip install huggingface_hub -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-To train FGDMAD, you can configure different parameters for model training and inference. Here, we list some important parameters for the training strategy and frequency-guided diffusion process:
-1. Training strategy:
-   - perturbe [true / false]: Whether to use perturbation training with input perturbation;
-   - weight_perturbe [float number]: The magnitude of input perturbation;
-   - dct [true / false]: Whether to use DCT to obtain conditioned code. If false, the conditioned code will be encoded by a trainable encoder;
-2. Frequency-guided diffusion process:
-    - masked_rate_dct: The mask rate using DCT masking.
+# Set HuggingFace mirror (China)
+export HF_ENDPOINT=https://hf-mirror.com
 
-You can update the parameters "data_dir", "test_path" and "dataset_path_to_robust" according to the path where the dataset is stored. Additionally, change the "dir_name" and TensorBoard parameters for better experiment tracking.
-
-To train FGDMAD:
-``` sh
-python train_FGDMAD.py --config config/[Avenue/UBnormal/STC]/{config_name}.yaml
+# Download datasets
+python scripts/download_data.py
 ```
 
-### **Evaluation by the Trained Model**
-The training configuration is saved in the relevant experiment directory (`/args.exp_dir/args.dataset_choice/args.dir_name`). 
-To evaluate the model on the test set, you need to modify the following parameters in the configuration file:
+**Option 2: Manual Download**
 
-- split: 'Test'
-- validation: 'False'
-- load_ckpt: 'name_of_ckpt'
+Download and organize as follows:
 
-Test FGDMAD:
-```sh
-python eval_FGDMAD.py --config /args.exp_dir/args.dataset_choice/args.dir_name/config.yaml
 ```
-Additionally, you can use the flag for human-related (HR) datasets:
-- use_hr: False -> Use the entire version of the dataset or the Human-Related one.
-
-Alternatively, you can use the provided configuration file:
-```sh
-python eval_FGDMAD.py --config /config/[HR-Avenue/HR-STC/UBnormal]/[test.yaml/test_hr.yaml]
+data/
+├── HR-Avenue/
+│   ├── training/
+│   │   └── trajectories/
+│   └── testing/
+│       ├── trajectories/
+│       └── test_frame_mask/
+├── HR-ShanghaiTech/
+│   ├── training/
+│   │   └── trajectories/
+│   └── testing/
+│       ├── trajectories/
+│       └── test_frame_mask/
+└── UBnormal/
+    ├── training/
+    │   └── trajectories/
+    └── testing/
+        ├── trajectories/
+        └── test_frame_mask/
 ```
 
-### **Pretrained Models**
+### Pre-trained Models
 
-The checkpoints for the pre-trained models on all datasets can be found in /checkpoints/[HR-Avenue/HR-STC/UBnormal]/train_experiment/checkpoint.ckpt. Note that our checkpoints will be released after the paper's official publication.
+**Option 1: Using Script**
+```bash
+# Set HuggingFace mirror (China)
+export HF_ENDPOINT=https://hf-mirror.com
 
-```sh
+# Download checkpoints
+python scripts/download_checkpoints.py
+```
+
+**Option 2: Manual Download**
+
+Download `checkpoints.zip` from [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff) and extract:
+```bash
 unzip checkpoints.zip
-
-python eval_FGDMAD.py --config /config/[HR-Avenue/HR-STC/UBnormal]/[test.yaml/test_hr.yaml]
 ```
-## Acknowledgement
 
-This work is built on many amazing research works and open-source projects, thanks a lot to all the authors for sharing!
+## 🚀 Quick Start
 
-- https://github.com/aleflabo/MoCoDAD
+### Training
 
-## Citation
-If you find this repository/work helpful in your research, please consider citing the paper and starring the repo ⭐.
+Key configuration parameters:
 
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `perturb` | bool | Enable perturbation training |
+| `weight_perturb` | float | Magnitude of input perturbation |
+| `dct` | bool | Use DCT for conditioned code (if `false`, uses trainable encoder) |
+| `masked_rate_dct` | float | Mask rate for DCT-based frequency masking |
+
+```bash
+# Train on HR-Avenue
+python train_FG-DIFF.py --config config/Avenue/train.yaml
+
+# Train on HR-ShanghaiTech
+python train_FG-DIFF.py --config config/STC/train.yaml
+
+# Train on UBnormal
+python train_FG-DIFF.py --config config/UBnormal/train.yaml
 ```
-@article{tan2024frequency,
-  title={Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
-  author={Tan, Xiaofeng and Wang, Hongsong and Geng, Xin},
+
+### Evaluation
+
+```bash
+# Evaluate on HR-Avenue
+python eval_FG-DIFF.py --config config/Avenue/test.yaml
+
+# Evaluate on HR-ShanghaiTech
+python eval_FG-DIFF.py --config config/STC/test.yaml
+
+# Evaluate on UBnormal
+python eval_FG-DIFF.py --config config/UBnormal/test.yaml
+
+# Human-related (HR) evaluation on Avenue
+python eval_FG-DIFF.py --config config/Avenue/test_hr.yaml
+```
+
+### Custom Inference
+
+Modify the configuration file:
+```yaml
+split: 'test'
+validation: false
+load_ckpt: 'checkpoint.ckpt'
+```
+
+Then run:
+```bash
+python eval_FG-DIFF.py --config /path/to/your/config.yaml
+```
+
+## 🙏 Acknowledgement
+
+This work builds upon several excellent research projects:
+
+- [MoCoDAD](https://github.com/aleflabo/MoCoDAD) - Motion-Conditioned Diffusion Model for Skeleton-based Video Anomaly Detection
+
+## 📝 Citation
+
+If you find this repository helpful, please consider citing our paper:
+
+```bibtex
+@article{tan2024fgdiff,
+  title={FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
+  author={Tan, Xiaofeng and Wang, Hongsong and Geng, Xin and Wang, Liang},
   journal={arXiv preprint arXiv:2412.03044},
   year={2024}
 }
+```
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  If you have any questions, please feel free to open an issue or contact us.
+</p>

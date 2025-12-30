@@ -6,7 +6,7 @@ import numpy as np
 import pytorch_lightning as pl
 import torch
 import yaml
-from models.FGDMAD import FGDMAD
+from models.FG_DIFF import FG_DIFF
 from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.strategies import DDPStrategy
@@ -20,9 +20,9 @@ torch.backends.cudnn.benchmark = False
 if __name__== '__main__':
 
     # Parse command line arguments and load config file
-    parser = argparse.ArgumentParser(description='Pose_AD_Experiment')
+    parser = argparse.ArgumentParser(description='FG-Diff')
     parser.add_argument('-c', '--config', type=str, required=True,
-                        default='/your_default_config_file_path')
+                        default='./config/Avenue/train.yaml')
 
     args = parser.parse_args()
     config_path = args.config
@@ -62,16 +62,12 @@ if __name__== '__main__':
         wandb_logger = False
 
     # Get dataset and loaders
-    #args.split = 'test'
-    #dataset, loader, _, _ = get_dataset_and_loader(args, split=args.split)
-    #args.split = 'train'
-    _, train_loader, _, val_loader = get_dataset_and_loader(args, split=args.split,validation=args.validation)
+    _, train_loader, _, val_loader = get_dataset_and_loader(args, split=args.split, validation=args.validation)
 
-    #exit()
     # Initialize model and trainer
-    model = FGDMAD(args)
+    model = FG_DIFF(args)
     
-    logger = TensorBoardLogger(save_dir='/root/tf-logs/', name=args.dataset_choice+'_new')
+    logger = TensorBoardLogger(save_dir='./logs/', name=args.dataset_choice)
 
     trainer = pl.Trainer(accelerator=args.accelerator, devices=args.devices, default_root_dir=args.ckpt_dir, max_epochs=args.n_epochs, 
                          logger=logger, callbacks=callbacks, strategy=DDPStrategy(find_unused_parameters=False), 
@@ -80,6 +76,6 @@ if __name__== '__main__':
     # Train the model    
     trainer.fit(model=model, train_dataloaders=train_loader, val_dataloaders=val_loader)
 
-    trainer.save_checkpoint(args.ckpt_dir + "/checkpoint_ae.ckpt")
+    trainer.save_checkpoint(args.ckpt_dir + "/checkpoint.ckpt")
     
     out = trainer.test(model, dataloaders=val_loader)

@@ -5,7 +5,7 @@ split: 'test' # data split; choices ['train', 'test']
 debug: false # if true, load only a few data samples
 seed: 6666
 validation: false # use validation; only for UBnormal
-use_hr: true # for validation and test on UBnormal
+use_hr: false # for validation and test on UBnormal
 
 ## Computational resources
 accelerator: 'gpu'
@@ -13,10 +13,11 @@ devices: [0] # indices of cuda devices to use
 
 ## Paths
 dir_name: 'train_experiment' # name of the directory of the current experiment
-data_dir: './data/UBnormal/' # path to the data
+data_dir: './data/UBnormal' # path to the data
 exp_dir: './checkpoints' # path to the directory that will contain the current experiment directory
-test_path: './data/UBnormal/validating/test_frame_mask' # path to the test data
-load_ckpt: 'checkpoint.ckpt' # name of the checkpoint to load at inference time epoch=17-step=1692.ckpt
+test_path: './data/UBnormal/testing/test_frame_mask' # path to the test data
+gt_path: './data/UBnormal/testing/test_frame_mask' # path to ground truth labels
+load_ckpt: 'checkpoint.ckpt' # name of the checkpoint to load at inference time
 create_experiment_dir: true
 
 ## WANDB configuration

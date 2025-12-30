@@ -13,9 +13,10 @@ devices: [0] # indices of cuda devices to use
 
 ## Paths
 dir_name: 'train_experiment' # name of the directory of the current experiment
-data_dir: './data/UBnormal/' # path to the data
+data_dir: './data/UBnormal' # path to the data
 exp_dir: './checkpoints' # path to the directory that will contain the current experiment directory
-test_path: './data/UBnormal/validating/test_frame_mask' # path to the test data
+test_path: './data/UBnormal/testing/test_frame_mask' # path to the test data
+gt_path: './data/UBnormal/testing/test_frame_mask' # path to ground truth labels
 load_ckpt: 'checkpoint.ckpt' # name of the checkpoint to load at inference time epoch=0-step=3572-v39.ckpt
 create_experiment_dir: true
 

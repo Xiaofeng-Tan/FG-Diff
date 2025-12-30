@@ -3,7 +3,7 @@ import os
 
 import pytorch_lightning as pl
 import yaml
-from models.FGDMAD import FGDMAD
+from models.FG_DIFF import FG_DIFF
 from utils.argparser import init_args
 from utils.dataset import get_dataset_and_loader
 import torch
@@ -14,7 +14,7 @@ from pytorch_lightning.loggers import TensorBoardLogger
 if __name__== '__main__':
     
     # Parse command line arguments and load config file
-    parser = argparse.ArgumentParser(description='MoCoDAD')
+    parser = argparse.ArgumentParser(description='FG-Diff')
     parser.add_argument('-c', '--config', type=str, required=True)
     args = parser.parse_args()
     args = yaml.load(open(args.config), Loader=yaml.FullLoader)
@@ -25,12 +25,11 @@ if __name__== '__main__':
     random.seed(args.seed)
     np.random.seed(args.seed) 
     pl.seed_everything(args.seed)
-    #torch.cuda.manual_seed(args.seed)
     
-    logger = TensorBoardLogger(save_dir='/root/tf-logs/', name="my_model")
+    logger = TensorBoardLogger(save_dir='./logs/', name="FG-Diff")
 
     # Initialize the model
-    model = FGDMAD(args)
+    model = FG_DIFF(args)
     
     if args.load_tensors:
         # Load tensors and test
