@@ -1,17 +1,23 @@
 <h1 align="center"><strong>FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection</strong></h1>
 
 <p align="center">
-  <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
-  Hongsong Wang<sup>1,2</sup>&emsp;
-  Xin Geng<sup>1,2</sup>&emsp;
-  Liang Wang<sup>3</sup>&emsp;
-  <br>
-  <sup>1</sup>Southeast University&emsp;
-  <sup>2</sup>PALM Lab @ SEU&emsp;
-  <sup>3</sup>National Lab of Pattern Recognition
+  <strong>🏆 IEEE Transactions on Image Processing (TIP), 2026</strong>
 </p>
 
 <p align="center">
+  <a href='https://xiaofeng-tan.github.io/' target='_blank'>Xiaofeng Tan<sup>1,2</sup></a>&emsp;
+  Hongsong Wang<sup>1,2</sup>&emsp;
+  Xin Geng<sup>1,2</sup>&emsp;
+  Liang Wang<sup>3,4</sup>&emsp;
+  <br>
+  <sup>1</sup>Southeast University&emsp;
+  <sup>2</sup>Key Lab of New Generation AI Technology&emsp;
+  <sup>3</sup>NLPR &amp; MAIS, Institute of Automation, CAS&emsp;
+  <sup>4</sup>UCAS
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/IEEE-TIP-00629B?style=flat&logo=ieee&logoColor=white" alt="IEEE TIP">
   <a href="https://arxiv.org/abs/2412.03044">
     <img src="https://img.shields.io/badge/arXiv-2412.03044-b31b1b?style=flat&logo=arXiv&logoColor=white" alt="arXiv">
   </a>
@@ -42,6 +48,7 @@
 
 ## 📣 News
 
+- [2026/08] 🎉 Our paper has been accepted by IEEE Transactions on Image Processing (TIP)!
 - [2025/12] 📖 Release technical documentation. See [Documentation (English)](docs/TECHNICAL_EN.md) | [文档 (中文)](docs/TECHNICAL_CN.md).
 - [2025/12] 🎉 Release pre-trained checkpoints on [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff).
 - [2025/12] 📦 Release datasets on [HuggingFace](https://huggingface.co/datasets/ModelsWeights/AD-FG-Diff).
@@ -222,11 +229,11 @@ This work builds upon several excellent research projects:
 If you find this repository helpful, please consider citing our paper:
 
 ```bibtex
-@article{tan2024fgdiff,
+@article{tan2026fgdiff,
   title={FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
   author={Tan, Xiaofeng and Wang, Hongsong and Geng, Xin and Wang, Liang},
-  journal={arXiv preprint arXiv:2412.03044},
-  year={2024}
+  journal={IEEE Transactions on Image Processing},
+  year={2026}
 }
 ```
 
