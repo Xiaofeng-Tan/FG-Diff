@@ -17,7 +17,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/IEEE-TIP-00629B?style=flat&logo=ieee&logoColor=white" alt="IEEE TIP">
+  <a href="https://ieeexplore.ieee.org/document/11689693">
+    <img src="https://img.shields.io/badge/IEEE-TIP-00629B?style=flat&logo=ieee&logoColor=white" alt="IEEE TIP">
+  </a>
+  <a href="https://doi.org/10.1109/TIP.2026.3730816">
+    <img src="https://img.shields.io/badge/DOI-10.1109%2FTIP.2026.3730816-007EC6" alt="DOI">
+  </a>
   <a href="https://arxiv.org/abs/2412.03044">
     <img src="https://img.shields.io/badge/arXiv-2412.03044-b31b1b?style=flat&logo=arXiv&logoColor=white" alt="arXiv">
   </a>
@@ -48,6 +53,7 @@
 
 ## 📣 News
 
+- [2026/09] 📄 Paper is available on [IEEE Xplore](https://ieeexplore.ieee.org/document/11689693).
 - [2026/08] 🎉 Our paper has been accepted by IEEE Transactions on Image Processing (TIP)!
 - [2025/12] 📖 Release technical documentation. See [Documentation (English)](docs/TECHNICAL_EN.md) | [文档 (中文)](docs/TECHNICAL_CN.md).
 - [2025/12] 🎉 Release pre-trained checkpoints on [HuggingFace](https://huggingface.co/ModelsWeights/AD-FG-Diff).
@@ -230,10 +236,11 @@ If you find this repository helpful, please consider citing our paper:
 
 ```bibtex
 @article{tan2026fgdiff,
-  title={FG-Diff: Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
+  title={Frequency-Guided Diffusion Model with Perturbation Training for Skeleton-Based Video Anomaly Detection},
   author={Tan, Xiaofeng and Wang, Hongsong and Geng, Xin and Wang, Liang},
   journal={IEEE Transactions on Image Processing},
-  year={2026}
+  year={2026},
+  doi={10.1109/TIP.2026.3730816}
 }
 ```
 
